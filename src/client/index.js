@@ -1,13 +1,13 @@
-import { checkForName } from './js/nameChecker'
+import { checkForUrl } from './js/urlChecker'
 import { handleSubmit } from './js/formHandler'
-const dotenv = require('dotenv');
 
-var aylien = require("aylien_textapi");
-var textapi = new aylien({
-    application_id: process.env.API_ID,
-    application_key: process.env.API_KEY
-    });
-console.log(checkForName);
+import './styles/resets.scss'
+import './styles/base.scss'
+import './styles/header.scss'
+import './styles/form.scss'
+import './styles/footer.scss'
 
-alert("I EXIST")
-console.log("CHANGE!!");
+
+export {
+    checkForUrl,handleSubmit
+}

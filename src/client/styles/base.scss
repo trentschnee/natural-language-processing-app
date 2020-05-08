@@ -1,0 +1,17 @@
+body {
+    
+    min-height: 100vh;
+}
+
+.container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+section {
+    max-width: 800px;
+    margin: 50px auto;
+}
