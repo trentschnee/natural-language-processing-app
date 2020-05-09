@@ -9,7 +9,7 @@ function checkForUrl(inputUrl,cb) {
     }
    else {
        error = "Invalid URL"
-        cb(false,error)
+        cb(true,error)
     }
 }
 

@@ -24,11 +24,32 @@ app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })
 
-app.post('/sentiment', function (req, res) {
+app.post('/sentimentTest', function (req, res) {
+    let appData = {};
+    let textContent = req.body.text;
 
-    let nameURL = req.body
-    console.log(nameURL)
-    res.send(nameURL)
+    console.log(textContent);
+    textapi.sentiment({'text': 'John is a very good football player!'}, (error, response) => { 
+        // Callback function will run after
+        // this line just test with text sometime
+        console.log(response,error);
+        error ? (appData = error) : (appData = response)
+        res.send(appData);
+    })
+   
+    // res.send(mockAPIResponse)
+})
+
+app.get('/sentiment', function (req, res) {
+    let appData = {};
+    let nameURL = req.query.url;
+    textapi.sentiment({ text: nameURL, mode: 'document' }, (error, response) => { 
+        // Callback function will run after
+        // this line just test with text sometime
+        error !== true ? (appData = response) : (appData.error = error)
+       
+    })
+    res.send(appData);
     // res.send(mockAPIResponse)
 })
 
