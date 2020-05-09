@@ -4,11 +4,11 @@ const bodyParser = require('body-parser')
 const cors = require('cors');
 const app = express()
 const aylien = require("aylien_textapi");
-const dotenv = require('dotenv');
+const dotenv = require('dotenv').config();
 
 var textapi = new aylien({
-    application_id: process.env.API_ID,
-    application_key: process.env.API_KEY
+    application_id: process.env.application_id,
+    application_key: process.env.application_key
 });
 // configure express to use body-parser
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -24,12 +24,10 @@ app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })
 
-app.post('/sentimentTest', function (req, res) {
+app.post('/sentimentText', function (req, res) {
     let appData = {};
     let textContent = req.body.text;
-
-    console.log(textContent);
-    textapi.sentiment({'text': 'John is a very good football player!'}, (error, response) => { 
+    textapi.sentiment({'text': textContent}, (error, response) => { 
         // Callback function will run after
         // this line just test with text sometime
         console.log(response,error);
@@ -37,20 +35,21 @@ app.post('/sentimentTest', function (req, res) {
         res.send(appData);
     })
    
-    // res.send(mockAPIResponse)
 })
 
-app.get('/sentiment', function (req, res) {
+app.post('/sentimentUrl', function (req, res) {
     let appData = {};
-    let nameURL = req.query.url;
-    textapi.sentiment({ text: nameURL, mode: 'document' }, (error, response) => { 
+    let textContent = req.body.text;
+    
+    textapi.sentiment({'url': textContent,
+        'mode': 'document'}, (error, response) => { 
         // Callback function will run after
         // this line just test with text sometime
-        error !== true ? (appData = response) : (appData.error = error)
-       
+        console.log(response,error);
+        error ? (appData = error) : (appData = response)
+        res.send(appData);
     })
-    res.send(appData);
-    // res.send(mockAPIResponse)
+   
 })
 
 // designates what port the app will listen to for incoming requests
