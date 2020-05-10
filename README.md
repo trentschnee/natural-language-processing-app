@@ -38,11 +38,3 @@ API_KEY=**************************
 ## Production Mode
 The application also allows you to build in production mode. Just do `npm run build-prod` or `yarn build-prod`
 
-## Check ✅
-
-All criteria in the rubric has been completed for the following sections in the rubric:
-
-1. Project Architecture - ✔
-2. Functionality - ✔
-
-All errors on here are soley bugs on webpack 4's part.  -> https://github.com/jantimon/html-webpack-plugin/issues/895
